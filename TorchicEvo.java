@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import Pokemon.*;
 import item.*;
 public class TorchicEvo extends JFrame{
@@ -138,6 +139,27 @@ public class TorchicEvo extends JFrame{
             }
         });
 
+        //Rename brutton
+        JButton renamebt = new JButton();
+        renamebt.setPreferredSize(new Dimension(130,30));
+        renamebt.setText("Rename");
+
+        renamebt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    String rename = JOptionPane.showInputDialog("Rename Pokemon  ");
+                    pokemon.status.setName(rename);
+                } catch (Exception e) {
+                    JOptionPane statusDialog = new JOptionPane();
+                    String text = "Error";
+                    JOptionPane.showMessageDialog(statusDialog,text,"Error",JOptionPane.INFORMATION_MESSAGE);
+                    makeGUI();
+                }
+                makeGUI();
+            }
+        });
+
         //use potion button
         JButton useredpotionbt = new JButton();
         useredpotionbt.setPreferredSize(new Dimension(130,30));
@@ -236,6 +258,7 @@ public class TorchicEvo extends JFrame{
         command = new JPanel();
         command.setLayout(new FlowLayout());
         command.add(statusbt);
+        command.add(renamebt);
         command.add(useredpotionbt);
         command.add(buypotionbt);
         command.add(buylvbt);
@@ -267,6 +290,8 @@ public class TorchicEvo extends JFrame{
                 money+=moneykill;
                 checkAll();
                 monster = new Poochyenalv20();
+                int lvmonster=ThreadLocalRandom.current().nextInt(pokemon.status.getLv()-3, pokemon.status.getLv()+3);
+                monster.status.setLv(lvmonster);
                 break;
             }
             JOptionPane attackAgain = new JOptionPane();
@@ -276,6 +301,8 @@ public class TorchicEvo extends JFrame{
             makeGUI();
             if(dialogResult != 0){
                 monster = new Poochyenalv20();
+                int lvmonster=ThreadLocalRandom.current().nextInt(pokemon.status.getLv()-3, pokemon.status.getLv()+3);
+                monster.status.setLv(lvmonster);
                 break;
                 
             }

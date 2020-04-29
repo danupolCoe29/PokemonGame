@@ -56,8 +56,6 @@ public class PokemonGame extends JFrame{
         getContentPane().add(btnButton);
         btnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-                System.out.println(treecko.status.getName());
                 TreeckoGame t2 = new TreeckoGame();
                 t2.setVisible(true);
                 setVisible(false);
